@@ -1,11 +1,10 @@
-<!--                        update form -->
+<!-- Update form -->
 <form action="" method="post">
     <div class="form-group">
 
         <?php
         if (isset($_GET['edit'])) {
             $cat_id = $_GET['edit'];
-
 
             $query = "select * from categories where cat_id = {$cat_id}";
             $select_categories_id = mysqli_query($connection, $query);
@@ -20,7 +19,8 @@
                 } ?>" type="text" class="form-control" name="cat_title">
                 <input type="submit" class="btn btn-primary" name="update_category" value="Update Category">
 
-            <?php }
+            <?php
+            }
         }
 
         // Update the category
