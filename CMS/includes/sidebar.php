@@ -29,7 +29,7 @@
     else {
         echo '<div class="well">';
         echo '<h4>Login</h4>';
-        echo '<form action="includes/login.php" method="post">';
+        echo '<form action="login.php" method="post">';
         echo '<div class="form-group">';
         echo '<input name="username" type="text" class="form-control" placeholder="Enter Username">';
         echo '</div>';

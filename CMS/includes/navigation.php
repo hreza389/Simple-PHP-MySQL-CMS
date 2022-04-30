@@ -17,36 +17,41 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
 
-                <li><a href="../CMS/admin/index.php">Admin</a></li>
-                <?php
 
+                <?php
                 // select all categories from the database
-                $query = "SELECT * FROM categories";
+                $query = "SELECT * FROM categories limit 3";
                 $select_all_categories_query = mysqli_query($connection, $query);
 
-                // loop through and display them in the navbar
+                $category_class = '';
+                $registration_class = '';
+                $contact_class = '';
+                // get the current file name
+                $file_name = basename($_SERVER['PHP_SELF']);
+
+
+                // echo out the categories as links
                 while ($row = mysqli_fetch_assoc($select_all_categories_query)) {
                     $cat_id = $row['cat_id'];
                     $cat_title = $row['cat_title'];
 
-                    $category_class = '';
-                    $registration_class = '';
-                    $contact_class = '';
-                    // get the current file name
-                    $file_name = basename($_SERVER['PHP_SELF']);
-
-                    if (isset($_GET['category']) && $_GET['category'] == $cat_id) {
-                        $category_class = 'active';
-
-                    } else if ($file_name == 'registration.php') {
-                        $registration_class = 'active';
-                    }
-                    else if ($file_name == 'contact.php') {
-                        $contact_class = 'active';
-                    }
+//                    if (isset($_GET['category']) && $_GET['category'] == $cat_id) {
+//                        $category_class = 'active';
+//                    } else if ($file_name == 'registration.php') {
+//                        $registration_class = 'active';
+//                    } else if ($file_name == 'contact.php') {
+//                        $contact_class = 'active';
+//                    }
 
                     // echo all categories in the navbar
                     echo "<li class='$category_class'><a href='category.php?category=$cat_id'>{$cat_title}</a></li>";
+                }
+
+                if (isLoggedIn()) {
+                    echo "<li class='$contact_class'><a href='../CMS/admin/index.php'>Admin</a></li>";
+                    echo "<li class='$contact_class'><a href='includes/logout.php'>Logout</a></li>";
+                } else {
+                    echo "<li class='$contact_class'><a href='login.php'>Login</a></li>";
                 }
                 ?>
 
@@ -59,12 +64,12 @@
                 if (isset($_SESSION['user_role'])) {
                     if (isset($_GET['p_id'])) {
                         $the_post_id = $_GET['p_id'];
-                        echo "<li><a style='background-color: dodgerblue;color: white;border-radius: 20px;' href='admin/posts.php?source=edit_post&p_id={$the_post_id}'>Edit Post</a></li>";
+                        echo "<li><a style='background-color: dodgerblue;color: white;border-radius: 10px;' href='admin/posts.php?source=edit_post&p_id={$the_post_id}'>Edit Post</a></li>";
                     }
                 }
                 ?>
 
-<!--                <li><a href="#">Services</a></li>-->
+                <!--                <li><a href="#">Services</a></li>-->
             </ul>
         </div>
         <!-- /.navbar-collapse -->

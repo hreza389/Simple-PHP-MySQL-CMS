@@ -47,7 +47,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (empty($value)) {
             unset($error[$key]);
         }
-
     }
 
     if (empty($error)) {
@@ -55,7 +54,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         login_user($username, $password);
     }
 }
-
 
 ?>
 <!-- Navigation -->

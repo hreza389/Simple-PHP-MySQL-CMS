@@ -45,7 +45,7 @@
             } else {
 
                 $count = ceil($count / $posts_per_page); // gives the number of pages
-                echo "number of pages = " . $count;
+//                echo "number of pages = " . $count;
 
                 // select all published posts from DB
                 $query = "SELECT * FROM posts where post_status = 'published' limit {$page_1}, {$posts_per_page}";
