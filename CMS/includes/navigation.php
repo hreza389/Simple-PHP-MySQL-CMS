@@ -49,7 +49,7 @@
 
                 if (isLoggedIn()) {
                     echo "<li class='$contact_class'><a href='../CMS/admin/index.php'>Admin</a></li>";
-                    echo "<li class='$contact_class'><a href='includes/logout.php'>Logout</a></li>";
+                    echo "<li class='$contact_class'><a href='./admin/includes/logout.php'>Logout</a></li>";
                 } else {
                     echo "<li class='$contact_class'><a href='login.php'>Login</a></li>";
                 }

@@ -1,11 +1,11 @@
-    <!-- include header -->
+<!-- include header -->
 <?php include 'includes/header.php'; ?>
 
-    <!-- Navigation -->
+<!-- Navigation -->
 <?php include 'includes/navigation.php'; ?>
 
-    <!-- Page Content -->
-    <div class="container">
+<!-- Page Content -->
+<div class="container">
 
     <div class="row">
 
@@ -36,7 +36,7 @@
 
 
             // Get the number of all published posts and count them for pagination
-//            $post_query_count = "SELECT * FROM posts WHERE post_status = 'published'";
+            //            $post_query_count = "SELECT * FROM posts WHERE post_status = 'published'";
             $find_count = mysqli_query($connection, $post_query_count);
             $count = mysqli_num_rows($find_count);
 

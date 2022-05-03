@@ -23,14 +23,12 @@ if (isset($_POST['submit'])) {
         // check if the email is valid
         if (!filter_var($sender_email, FILTER_VALIDATE_EMAIL)) {
             $message = "Invalid email format";
-        }
-        else {
+        } else {
             $headers = "From: " . $sender_email;
             $result = mail($to, $subject, $body, $headers);
             if ($result) {
                 $message = "Email sent successfully";
-            }
-            else {
+            } else {
                 $message = "Email sending failed";
             }
         }
@@ -39,8 +37,7 @@ if (isset($_POST['submit'])) {
 //        $email = mysqli_real_escape_string($connection, $email);
 //        $body = mysqli_real_escape_string($connection, $body);
 //        $message = "Your registration has been submitted.".'<br><br>'.'<a style="color: white" href="index.php">Login</a>';
-    }
-    else {
+    } else {
         $message = "Fields cannot be empty!";
     }
 }
@@ -61,13 +58,15 @@ if (isset($_POST['submit'])) {
                         <form role="form" action="" method="post" id="contact-form">
 
                             <h6 style="background-color: dodgerblue;padding: 5px;color: white;" class="text-center">
-                                <?php if (isset($message)) {echo $message;} ?>
+                                <?php if (isset($message)) {
+                                    echo $message;
+                                } ?>
                             </h6>
 
-<!--                            <div class="form-group">-->
-<!--                                <label for="name" class="sr-only">name</label>-->
-<!--                                <input autocomplete="off" type="text" name="name" id="name" class="form-control" placeholder="Name">-->
-<!--                            </div>-->
+                            <!--                            <div class="form-group">-->
+                            <!--                                <label for="name" class="sr-only">name</label>-->
+                            <!--                                <input autocomplete="off" type="text" name="name" id="name" class="form-control" placeholder="Name">-->
+                            <!--                            </div>-->
 
                             <div class="form-group">
                                 <label for="subject" class="sr-only">Subject</label>

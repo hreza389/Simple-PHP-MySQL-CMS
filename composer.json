@@ -1,0 +1,19 @@
+{
+    "name": "hamid/cmc-project",
+    "require-dev": {
+        "phpmailer/phpmailer": "^6.6"
+    },
+    "autoload": {
+        "classmap": []
+    },
+    "authors": [
+        {
+            "name": "hreza389",
+            "email": "hreza389@gmail.com"
+        }
+    ],
+    "require": {
+      "ext-mysqli": "*",
+        "ext-openssl": "*"
+    }
+}

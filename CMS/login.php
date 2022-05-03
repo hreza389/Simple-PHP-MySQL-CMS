@@ -1,11 +1,26 @@
 <?php
 include "includes/header.php";
+
+checkIfUserIsLoggedInAndRedirect('admin/index.php');
+
+// check request method (post/get)
+if (ifItIsMethod('post')) {
+    if (isset($_POST['username']) && isset($_POST['password'])) {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+
+        login_user($username, $password);
+    }
+    else {
+        redirect('login.php');
+    }
+}
+
+
 ?>
 
 <!-- Navigation -->
 <?php  include "includes/navigation.php"; ?>
-
-
 <!-- Page Content -->
 <div class="container">
 
@@ -69,6 +84,7 @@ include "includes/header.php";
 
 
 <!--// if login form submit button is clicked-->
+
 <!--//if (isset($_POST['login'])) {-->
 <!--//    login_user($_POST['username'], $_POST['password']);-->
 <!--//}-->

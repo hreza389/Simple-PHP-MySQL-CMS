@@ -58,14 +58,15 @@ function insert_categories()
 
         if ($cat_title == "" || empty($cat_title)) {
             echo "this field should not be empty";
-        }
-        else {
+        } else {
 
             $stmt = mysqli_prepare($connection, "INSERT INTO categories(cat_title) VALUES(?)");
             mysqli_stmt_bind_param($stmt, 's', $cat_title);
             mysqli_stmt_execute($stmt);
 
-            if (!$stmt) {die('QUERY FAILED' . mysqli_error($connection));}
+            if (!$stmt) {
+                die('QUERY FAILED' . mysqli_error($connection));
+            }
         }
         // close the statement
         mysqli_stmt_close($stmt);
@@ -163,7 +164,8 @@ function email_exists($email)
     confirmQuery($result);
     if (mysqli_num_rows($result) > 0) {
         return true;
-    } else {
+    }
+    else {
         return false;
     }
 }
@@ -174,7 +176,7 @@ function redirect($location)
     exit;
 }
 
-function ifItIsMethod($method=null)
+function ifItIsMethod($method = null)
 {
     if ($_SERVER['REQUEST_METHOD'] == strtoupper($method)) {
         return true;
@@ -190,7 +192,7 @@ function isLoggedIn()
     return false;
 }
 
-function checkIfUserIsLoggedInAndRedirect($redirectLocation=null)
+function checkIfUserIsLoggedInAndRedirect($redirectLocation = null)
 {
     if (isLoggedIn()) {
         redirect($redirectLocation);
@@ -229,25 +231,42 @@ function login_user($username, $password)
     confirmQuery($select_user_query);
 
     while ($row = mysqli_fetch_assoc($select_user_query)) {
-        $db_id = $row['user_id'];
+//        $db_id = $row['user_id'];
         $db_username = $row['user_username'];
         $db_password = $row['user_password'];
         $db_firstname = $row['user_firstname'];
         $db_lastname = $row['user_lastname'];
         $db_role = $row['user_role'];
+
+        if (password_verify($password, $db_password)) {
+
+            //password_verify($password, $db_password) && $username === $db_username
+            $_SESSION['username'] = $db_username; // set session username
+            $_SESSION['firstname'] = $db_firstname; // set session firstname
+            $_SESSION['lastname'] = $db_lastname; // set session lastname
+            $_SESSION['user_role'] = $db_role; // set session role
+
+            redirect("/cms/admin");
+        }
+        else {
+            return false;
+        }
     }
+    return true;
+}
 
-    // check if there is a match and if so, login and redirect to admin page and set session variables
-    if (password_verify($password, $db_password)) {
-
-        //password_verify($password, $db_password) && $username === $db_username
-        $_SESSION['username'] = $db_username; // set session username
-        $_SESSION['firstname'] = $db_firstname; // set session firstname
-        $_SESSION['lastname'] = $db_lastname; // set session lastname
-        $_SESSION['user_role'] = $db_role; // set session role
-
-        redirect("/cms/admin");
-
+function imagePlaceholder($image = '')
+{
+    if (!$image) {
+        return 'image_placeholder.jpg';
+    } else {
+        return $image;
     }
 }
 
+function currentUser()
+{
+    if (isset($_SESSION['username'])) {
+        return $_SESSION['username'];
+    }
+}
