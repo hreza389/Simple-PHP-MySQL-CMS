@@ -270,3 +270,14 @@ function currentUser()
         return $_SESSION['username'];
     }
 }
+
+function anchor($url, $title, $class = '')
+{
+    if ($class == '') {
+        return "<a href='{$url}'>{$title}</a>";
+    } else {
+        return "<a href='{$url}' class='{$class}'>{$title}</a>";
+    }
+}
+
+

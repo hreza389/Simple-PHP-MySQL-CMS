@@ -2,14 +2,13 @@
 
 // check request method (post/get)
 if (ifItIsMethod('post')) {
-    if (isset($_POST['username']) && isset($_POST['password'])) {
-        $username = $_POST['username'];
-        $password = $_POST['password'];
 
-        login_user($username, $password);
-    } else {
-        redirect('index.php');
+    if (isset($_POST['login'])){
+        if (isset($_POST['username']) && isset($_POST['password'])) {login_user($_POST['username'], $_POST['password']);}
+        else {redirect('index.php');}
     }
+
+
 }
 
 ?>
@@ -50,9 +49,11 @@ if (ifItIsMethod('post')) {
                     <input name="username" type="text" class="form-control" placeholder="Enter Username">
                 </div>
                 <div class="input-group">
-                    <input name="password" type="password" class="form-control" placeholder="Enter Password">
+                    <label>
+                        <input name="password" type="password" class="form-control" placeholder="Enter Password">
+                    </label>
                     <span class="input-group-btn">
-        <button class="btn btn-primary" name="login" type="submit">Login</button>
+                        <button class="btn btn-primary" name="login" type="submit">Login</button>
                     </span>
                 </div>
 

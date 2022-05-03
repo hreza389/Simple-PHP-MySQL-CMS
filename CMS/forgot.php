@@ -1,5 +1,6 @@
 <?php
 
+// PHP MAILER
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
@@ -9,11 +10,10 @@ include "includes/header.php";
 include "Classes/Config.php";
 require '../vendor/autoload.php';
 
-// if forgot variable is not set, then redirect.
-if (!isset($_GET['forgot'])) {
+// if forgot variable isn't set or is empty, then redirect.
+if (empty($_GET['forgot'])) {
     redirect('index.php');
 }
-
 
 // FORM SUBMISSION
 if (ifItIsMethod('post')) {
@@ -56,7 +56,7 @@ if (ifItIsMethod('post')) {
 
                 if ($mail->send()) {
                     $emailSent = true;
-                    $message = '<b>Email sent.</b>'.'<br>'.'<b>Please check your email.</b>';
+                    $message = '<b>Email sent.</b>'.'<br>'.'<b>Please check your email.</b>'.'<br>'.anchor('index.php', 'Home');
                 }
                 else {
                     $message = 'Email not sent.'.$mail->ErrorInfo;
@@ -73,6 +73,8 @@ if (ifItIsMethod('post')) {
 }
 ?>
 
+<!-- Navigation -->
+<?php include "includes/navigation.php"; ?>
 
 <!-- Page Content -->
 <div class="container">

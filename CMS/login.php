@@ -62,7 +62,7 @@ if (ifItIsMethod('post')) {
 
 
                                 </form>
-
+                                <a href="./forgot.php?forgot=<?php echo uniqid(true); ?>">Forgot Password</a>
                             </div><!-- Body-->
 
                         </div>
